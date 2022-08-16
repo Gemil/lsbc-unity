@@ -7,8 +7,8 @@ config:
   application: 'LSBC Unity'
   repository: 'git@github.com:Gemil/lsbc-unity.git'
   php_fpm_version: '8.1'
-  remote_user: root
-  basepath: '/var/www'
+  remote_user: lsbc
+  basepath: '/home/lsbc/www'
 
 hosts:
   prod:
