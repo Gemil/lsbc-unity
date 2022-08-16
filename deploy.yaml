@@ -33,8 +33,7 @@ tasks:
     - deploy:publish
     - php-fpm:reload
   npm:run:prod:
-    script:
-      - 'cd {{release_or_current_path}} && npm run prod'
+      - run: 'cd {{release_path}} && npm run prod'
 
 after:
   deploy:failed: deploy:unlock
