@@ -25,7 +25,9 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Install NPM Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm run prod
       - name: Generate Key
         run: php artisan key:generate
       - name: Execute tests (Unit and Feature tests) via PHPUnit
@@ -42,7 +44,7 @@ jobs:
       - name: NPM Build
         run: |
           npm install
-          npm run build
+          npm run prod
       - name: Put built assets in Artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -58,7 +60,7 @@ jobs:
       - name: NPM Build
         run: |
           npm install
-          npm run build
+          npm run prod
       - name: Put built assets in Artifacts
         uses: actions/upload-artifact@v1
         with:
