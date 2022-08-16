@@ -29,16 +29,16 @@ task('deploy:secrets', function () {
     upload('.env', get('deploy_path') . '/shared');
 });
 
-//host('manager.ls-bc.net')
-//  ->hostname('159.69.197.61')
-//  ->stage('production')
-//  ->user('root')
-//  ->set('deploy_path', '/var/www/manager.ls-bc.net');
+host('manager.ls-bc.net')
+  ->hostname('159.69.197.61')
+  ->stage('production')
+  ->user('www-data')
+  ->set('deploy_path', '/var/www/manager.ls-bc.net');
 
 host('staging.manager.ls-bc.net')
   ->hostname('159.69.197.61')
   ->stage('staging')
-  ->user('root')
+  ->user('www-data')
   ->set('deploy_path', '/var/www/staging.manager.ls-bc.net');
 
 after('deploy:failed', 'deploy:unlock');
