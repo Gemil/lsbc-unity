@@ -1,0 +1,40 @@
+import:
+  - recipe/laravel.php
+  - contrib/php-fpm.php
+  - contrib/npm.php
+
+config:
+  application: 'LSBC Unity'
+  repository: 'git@github.com:Gemil/lsbc-unity.git'
+  php_fpm_version: '8.1'
+  remote_user: root
+  basepath: '/var/www'
+
+hosts:
+  prod:
+    hostname: 159.69.197.61
+    deploy_path: '{{basepath}}/manager.ls-bc.net'
+  staging:
+    hostname: 159.69.197.61
+    deploy_path: '{{basepath}}/staging.manager.ls-bc.net'
+
+tasks:
+  deploy:
+    - deploy:prepare
+    - deploy:vendors
+    - artisan:storage:link
+    - artisan:view:cache
+    - artisan:config:cache
+    - artisan:down
+    - artisan:migrate
+    - artisan:up
+    - npm:install
+    - npm:run:prod
+    - deploy:publish
+    - php-fpm:reload
+  npm:run:prod:
+    script:
+      - 'cd {{release_or_current_path}} && npm run prod'
+
+after:
+  deploy:failed: deploy:unlock
