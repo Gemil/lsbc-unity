@@ -11,7 +11,7 @@ config:
   basepath: '/home/lsbc/www'
 
 hosts:
-  prod:
+  production:
     hostname: 159.69.197.61
     deploy_path: '{{basepath}}/manager.ls-bc.net'
   staging:
